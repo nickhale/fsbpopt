@@ -6,7 +6,7 @@ if (nargin == 0)
     F = @(x) [x.^0, x, exp(x)]; % Basis
 end
 
-N = 4;
+N = length(x);
 x0 = x(1); x1 = x(end);
 F = chebfun(F, [x(1), x(end)]);
 Fp = diff(F);
@@ -17,8 +17,6 @@ Vp = Fp(x);
 
 % Constructing Q and P
 B = zeros(N); B(1,1) = -1; B(end,end) = 1; % boundary matrix
-size(B)
-size(V)
 r1 = -0.5*B*V; r1 = r1(:);                 % RHS vec for the first equation
 
 [C,K] = comm_matrix(N);                    % Communication matrices

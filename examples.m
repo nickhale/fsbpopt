@@ -5,7 +5,7 @@ dom = [0 1];
 F = @(x) [1+0*x, x, exp(x)];
 G = @(x) [1+0*x, x, exp(x), x.*exp(x), exp(2*x), x.^2];
 
-[x, w, P, D, err] = gsbpopt(F, dom, G);
+[x, w, P, D, err] = fsbpopt(F, dom, G);
 disp(table(x, w))
 D
 num2str(D, '%1.10f')
@@ -53,6 +53,7 @@ x = linspace(0, 1, 4).';
 [P, Q, D, Err_lsqr] = pqd_orig(x, F);
 w = diag(P);
 disp(table(x, w))
+D
 
 
 % Error checks
@@ -101,7 +102,7 @@ xc = chebfun('x', dom);
 F = besselj(0:15,xc);
 F = @(x) feval(F, x);
 
-[x, w, P, D, err] = gsbpopt(F, dom, [], tol);
+[x, w, P, D, err] = fsbpopt(F, dom, [], tol);
 disp(table(x, w))
 length(x)
 
